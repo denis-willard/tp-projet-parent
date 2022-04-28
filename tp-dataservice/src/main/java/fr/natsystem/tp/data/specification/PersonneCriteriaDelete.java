@@ -11,7 +11,9 @@ import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
 
+import fr.natsystem.tp.data.embedded.IdentitePk_;
 import fr.natsystem.tp.data.models.Personne;
+import fr.natsystem.tp.data.models.Personne_;
 
 public class PersonneCriteriaDelete {
 	
@@ -37,5 +39,26 @@ public class PersonneCriteriaDelete {
 	}
 	
 
+	// Variante avec utilisation de jpamodelgen
+
+	public static CriteriaDelete<Personne> getDeletePersonneEnMieux(
+			CriteriaBuilder cb,
+			String valeur
+			) {
+		if (StringUtils.isBlank(valeur) || cb == null) return null;
+		
+		CriteriaDelete<Personne> criteriaDelete = cb.createCriteriaDelete(Personne.class);
+		Root<Personne> root = criteriaDelete.from(Personne.class);
+		
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(cb.like(root.get(Personne_.IDENTITE).get(IdentitePk_.NOM), "%" + valeur + "%"));
+		predicates.add(cb.like(root.get(Personne_.IDENTITE).get(IdentitePk_.PRENOM), "%" + valeur + "%"));
+		
+		Expression<Boolean> expression = cb.or(predicates.toArray(new Predicate[0]));
+		
+		criteriaDelete.where(expression);
+		return criteriaDelete;
+	}
+	
 
 }

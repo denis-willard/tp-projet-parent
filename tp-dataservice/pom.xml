@@ -20,6 +20,8 @@
 		<javax.el-api.version>3.0.0</javax.el-api.version>
 		<javax.interceptor.version>1.2.2</javax.interceptor.version>
 		<commons-lang3.version>3.9</commons-lang3.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
 	</properties>
 
 	<build>
@@ -40,8 +42,42 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+						<path>
+							<groupId>org.hibernate</groupId>
+							<artifactId>hibernate-jpamodelgen</artifactId>
+							<version>${hibernate-jpamodelgen.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
-		</plugins>
+           <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build-helper-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>target/generated-sources/annotations</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+             </plugin>
+ 		</plugins>
 	</build>
 
 
