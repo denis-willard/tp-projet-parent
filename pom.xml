@@ -75,6 +75,7 @@
 				<groupId>org.springframework</groupId>
 				<version>${springframework.core.version}</version>
 			</dependency>
+			
 			<dependency>
 				<artifactId>spring-web</artifactId>
 				<groupId>org.springframework</groupId>
