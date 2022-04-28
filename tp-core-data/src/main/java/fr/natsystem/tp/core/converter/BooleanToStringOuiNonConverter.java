@@ -19,7 +19,7 @@ public class BooleanToStringOuiNonConverter implements AttributeConverter<Boolea
     @Override
     public Boolean convertToEntityAttribute(String value) {
         if (StringUtils.isBlank(value)) return null;
-        return ConstantesOuiNon.OUI.equals(value);
+        return BooleanUtils.isTrue( ConstantesOuiNon.OUI.equals(value) );
     }
 
 }

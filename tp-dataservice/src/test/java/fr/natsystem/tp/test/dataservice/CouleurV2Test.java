@@ -8,20 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.natsystem.tp.data.models.Couleur;
-import fr.natsystem.tp.data.repository.CouleurRepository;
+import fr.natsystem.tp.core.utilities.CouleurEnum;
+import fr.natsystem.tp.data.models.CouleurV2;
+import fr.natsystem.tp.data.repository.CouleurV2Repository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/testApplicationContext.xml")
-public class CouleurTest {
+public class CouleurV2Test {
 
 	@Autowired
-	private CouleurRepository repo;
+	private CouleurV2Repository repo;
 	
 	@Test
 	public void testSaveCouleur() {
-		Couleur couleur = new Couleur("Rouge", "Non");
-		Couleur result = repo.save(couleur);
+		CouleurV2 couleur = new CouleurV2(CouleurEnum.ROUGE_ENUM, Boolean.FALSE);
+		CouleurV2 result = repo.save(couleur);
 		assertNotNull(result);
 	}
 
