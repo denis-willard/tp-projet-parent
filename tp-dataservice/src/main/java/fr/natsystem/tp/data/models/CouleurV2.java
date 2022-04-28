@@ -18,6 +18,11 @@ import fr.natsystem.tp.core.utilities.CouleurEnum;
 @Table(name="T_COULEUR")
 public class CouleurV2 {
 
+	/*
+	 * Variante de la classe Couleur, 
+	 * mais l'attribut champ couleur est de type CouleurEnum
+	 * et l'attribut petillant est de type Boolean
+	 */
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SQ_COULEUR")
