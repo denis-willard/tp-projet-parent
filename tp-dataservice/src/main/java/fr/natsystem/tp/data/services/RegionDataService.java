@@ -33,7 +33,7 @@ public class RegionDataService {
 	}
 	
 	@Transactional
-	public Region getRegionById(Long id ) {
+	public Region getRegionById(Long id) {
 		Optional<Region> temp = repo.findById(id);
 		if (temp.isPresent()) {
 			return temp.get();
