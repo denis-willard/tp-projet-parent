@@ -11,9 +11,7 @@ import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
 
-import fr.natsystem.tp.data.embedded.IdentitePk_;
 import fr.natsystem.tp.data.models.Personne;
-import fr.natsystem.tp.data.models.Personne_;
 
 public class PersonneCriteriaDelete {
 	
@@ -40,7 +38,7 @@ public class PersonneCriteriaDelete {
 	
 
 	// Variante avec utilisation de jpamodelgen
-
+/*
 	public static CriteriaDelete<Personne> getDeletePersonneEnMieux(
 			CriteriaBuilder cb,
 			String valeur
@@ -59,6 +57,6 @@ public class PersonneCriteriaDelete {
 		criteriaDelete.where(expression);
 		return criteriaDelete;
 	}
-	
+*/	
 
 }

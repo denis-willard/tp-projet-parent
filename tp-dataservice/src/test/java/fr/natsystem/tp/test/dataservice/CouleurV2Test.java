@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import fr.natsystem.tp.core.utilities.CouleurEnum;
 import fr.natsystem.tp.data.models.CouleurV2;
 import fr.natsystem.tp.data.repository.CouleurV2Repository;
+import fr.natsystem.tp.data.services.CouleurV2DataService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/testApplicationContext.xml")
@@ -19,10 +20,12 @@ public class CouleurV2Test {
 	@Autowired
 	private CouleurV2Repository repo;
 	
+	@Autowired
+	private CouleurV2DataService dataservice;
+	
 	@Test
 	public void testSaveCouleur() {
-		CouleurV2 couleur = new CouleurV2(CouleurEnum.ROUGE_ENUM, Boolean.FALSE);
-		CouleurV2 result = repo.save(couleur);
+		CouleurV2 result = dataservice.enregistreCouleur(CouleurEnum.BIERE_ENUM, Boolean.TRUE); 
 		assertNotNull(result);
 	}
 

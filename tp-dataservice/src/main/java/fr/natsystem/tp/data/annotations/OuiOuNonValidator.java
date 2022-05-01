@@ -5,6 +5,8 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.apache.commons.lang3.StringUtils;
 
+import fr.natsystem.tp.core.utilities.ConstantesOuiNon;
+
 public class OuiOuNonValidator implements ConstraintValidator<OuiOuNon, String> {
 
 
@@ -15,7 +17,11 @@ public class OuiOuNonValidator implements ConstraintValidator<OuiOuNon, String> 
     public boolean isValid(String valeur, ConstraintValidatorContext context) {
 
         if (StringUtils.isBlank(valeur)) return true;
-        return true;
+        
+        if ( ConstantesOuiNon.OUI.equals(valeur)) return true;
+        if ( ConstantesOuiNon.NON.equals(valeur)) return true;
+        
+        return false;
 
     }
 

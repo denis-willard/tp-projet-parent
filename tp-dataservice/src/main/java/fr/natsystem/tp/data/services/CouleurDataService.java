@@ -2,6 +2,7 @@ package fr.natsystem.tp.data.services;
 
 import java.io.Serializable;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import fr.natsystem.tp.data.repository.CouleurRepository;
 public class CouleurDataService implements Serializable {
 	private static final long serialVersionUID = -2276139062930532654L;
 	
+	@Autowired
+	private EntityManager em;
 
 	@Autowired
 	private CouleurRepository couleurRepository;

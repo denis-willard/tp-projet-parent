@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import fr.natsystem.tp.data.annotations.OuiOuNon;
+
 @Entity
 @Table(name="T_COULEUR")
 public class Couleur {
@@ -27,6 +29,7 @@ public class Couleur {
 	
 	@Column(name = "PETILLANT")
 	@Size(max = 3)
+	@OuiOuNon(message = "valeurs OUI ou NON pour le champ pétillant")
 	private String petillant;
 
 	public Couleur() {

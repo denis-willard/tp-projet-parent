@@ -2,8 +2,10 @@ package fr.natsystem.tp.test.dataservice;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.natsystem.tp.data.models.Region;
 import fr.natsystem.tp.data.repository.RegionRepository;
+import fr.natsystem.tp.data.services.RegionDataService;
 import fr.natsystem.tp.data.specification.RegionSpecification;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,6 +25,18 @@ public class RegionServiceTest {
 
 	@Autowired
 	private RegionRepository repo;
+	
+	@Autowired
+	private RegionDataService dataservice;
+	
+	@Test
+	public void testCriteriaUpdateRegion() {
+		int n = dataservice.updateNomRegion(43L, "Alsace");
+		assertEquals(1, n);
+		Optional<Region> result = repo.findById(43L);
+		assertTrue(result.isPresent());
+		assertEquals("Alsace", result.get().getNom());
+	}
 	
 	@Test
 	public void testInsertRegion() {

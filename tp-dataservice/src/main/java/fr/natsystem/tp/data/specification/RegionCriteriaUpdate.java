@@ -8,7 +8,7 @@ import fr.natsystem.tp.data.models.Region;
 
 public class RegionCriteriaUpdate {
 
-	// UPDATE T_REGION SET NOM = :nouveauNom WHER ID = :idE 
+	// UPDATE T_REGION SET NOM = :nouveauNom WHERE ID = :id 
 
 	public static CriteriaUpdate<Region> getUpdateNomById(CriteriaBuilder criteriaBuilder, Long id, String nouveauNom) {
 		if (id == null || criteriaBuilder == null) {
