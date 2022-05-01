@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class BouteilleTest {
 	private BouteilleDataService bouteilleDataService;
 	
 	@Test
+	@Ignore
 	public void testJointure() {
 		List<Bouteille> result = bouteilleDataService.getParNomRegion("Bourgogne");
 		assertNotNull(result);

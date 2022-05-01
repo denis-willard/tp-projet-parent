@@ -46,4 +46,11 @@ public class RegionDataService {
 	public List<Region> getAllRegions() {
 		return repo.findAll();
 	}
+	
+
+	@Transactional
+	public void deleteRegionById(Long id) {
+		repo.deleteById(id);
+	}
+
 }
