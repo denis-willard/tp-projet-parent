@@ -17,4 +17,7 @@ public interface PersonneRepository extends JpaRepository<Personne, IdentitePk> 
 	List<Personne> findAll(Specification<Personne> spec);
 
 	Page<Personne> findAll(Specification<Personne> spec, Pageable pageable);
+
+	Page<Personne> findAll(Pageable pageable);
+
 }

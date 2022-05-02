@@ -1,8 +1,12 @@
 package fr.natsystem.tp.rest.dto;
 
+import javax.validation.constraints.Size;
+
 public class RegionDTO {
 
 	private Long id;
+
+	@Size(max = 255, message = "Le nom de région ne doit pas dépasser 255 caractères.")
 	private String nomRegion;
 	private String description;
 	

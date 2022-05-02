@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.natsystem.tp.core.exception.NotFoundException;
+import fr.natsystem.tp.core.converter.ValidationService;
+import fr.natsystem.tp.core.exception.ValidationEntityException;
 import fr.natsystem.tp.data.models.Region;
 import fr.natsystem.tp.data.services.RegionDataService;
 import fr.natsystem.tp.rest.dto.ListePagineeDTO;
@@ -33,7 +34,11 @@ public class RegionController {
 	@Autowired
 	private RegionDataService dataservice;
 	
-	@Autowired RegionMapper mapper;
+	@Autowired
+	RegionMapper mapper;
+	
+	@Autowired 
+	ValidationService validator;
 	
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public RegionDTO getRegionById(@PathVariable("id") Long id) {
@@ -64,7 +69,10 @@ public class RegionController {
 
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RegionDTO postRegion(@RequestBody RegionDTO dto) {
+	public RegionDTO postRegion(@RequestBody RegionDTO dto) throws ValidationEntityException {
+
+		validator.checkConstraints(dto, "", "postRegion");
+		
 		Region region = mapper.convertToEntity(dto);
 		Region result = dataservice.createRegion(region);
 		return mapper.convertToDto(result);
@@ -75,7 +83,10 @@ public class RegionController {
 	@PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public RegionDTO putRegion(
 			@PathVariable("id") Long id,
-			@RequestBody RegionDTO dto) {
+			@RequestBody RegionDTO dto) throws ValidationEntityException {
+
+		validator.checkConstraints(dto, "", "postRegion");
+		
 		Region region = mapper.convertToEntity(dto);
 		region.setId(id);
 		Region result = dataservice.saveRegion(region);
