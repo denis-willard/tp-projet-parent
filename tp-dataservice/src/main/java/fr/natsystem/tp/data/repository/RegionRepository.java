@@ -2,6 +2,8 @@ package fr.natsystem.tp.data.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +25,6 @@ public interface RegionRepository extends JpaRepository<Region, Long> {
 	@Query(value = "SELECT * from T_REGION WHERE nom = :nom", nativeQuery = true)
 	List<Region> getAllByNomNatif(@Param("nom") String nom);
 	
+	// liste paginée
+	Page<Region> findAllByNom(String nom, Pageable pageable);
 }

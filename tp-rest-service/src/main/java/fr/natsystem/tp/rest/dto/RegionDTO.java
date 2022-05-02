@@ -3,7 +3,7 @@ package fr.natsystem.tp.rest.dto;
 public class RegionDTO {
 
 	private Long id;
-	private String nom;
+	private String nomRegion;
 	private String description;
 	
 	public RegionDTO() {
@@ -15,11 +15,12 @@ public class RegionDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNom() {
-		return nom;
+
+	public String getNomRegion() {
+		return nomRegion;
 	}
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNomRegion(String nomRegion) {
+		this.nomRegion = nomRegion;
 	}
 	public String getDescription() {
 		return description;
