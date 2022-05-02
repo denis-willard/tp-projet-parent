@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.natsystem.tp.core.converter.ValidationService;
+import fr.natsystem.tp.core.exception.ForbiddenException;
 import fr.natsystem.tp.core.exception.ValidationEntityException;
 import fr.natsystem.tp.data.models.Region;
 import fr.natsystem.tp.data.services.RegionDataService;
@@ -69,8 +71,14 @@ public class RegionController {
 
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RegionDTO postRegion(@RequestBody RegionDTO dto) throws ValidationEntityException {
+	public RegionDTO postRegion(
+			@RequestHeader("NomUtilisateur") String nomUtilisateur,
+			@RequestBody RegionDTO dto) throws ValidationEntityException, ForbiddenException {
 
+		if (!"admin".equals(nomUtilisateur)) {
+			throw new ForbiddenException("Privilège insuffisant", "", "Privilège insuffisant", "");
+		}
+		
 		validator.checkConstraints(dto, "", "postRegion");
 		
 		Region region = mapper.convertToEntity(dto);

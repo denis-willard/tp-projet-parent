@@ -2,11 +2,14 @@ package fr.natsystem.tp.rest.dto;
 
 import javax.validation.constraints.Size;
 
+import fr.natsystem.tp.core.validators.NeCommencePasParX;
+
 public class RegionDTO {
 
 	private Long id;
 
 	@Size(max = 255, message = "Le nom de région ne doit pas dépasser 255 caractères.")
+	@NeCommencePasParX
 	private String nomRegion;
 	private String description;
 	
