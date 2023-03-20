@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Logging configuration -->
+<Configuration name="mainConfig">
+
+    <!-- Define global properties -->
+    <Properties>
+        <!-- Logging Patterns -->
+        <!-- fullPatternLayout will produce:  -->
+        <!-- 2014-11-24 10:45:52,082 - [thread_id][ip_address:session_id] DEBUG: MyClass: MyMessage  -->
+        <Property name="fullpatternLayout">%d{ISO8601} %logger{9.9..} [%-X{tid}][%-X{gid}:%-X{uid}] %-5p - %m%n</Property>
+
+        <!-- patternLayout will produce -->
+        <!-- 2014-11-24 10:45:52,082 - [thread_name] DEBUG: MyClass: MyMessage -->
+        <Property name="patternLayout">%d{yyMMdd HH:mm:ss,SSS} [%T] %-5p - %logger{50.9.3.1.1.} --- %m%n</Property>
+        <Property name="appName">tp-rest-service</Property>
+        <!-- More on patterns here: http://logging.apache.org/log4j/2.0/manual/layouts.html#PatternLayout -->
+    </Properties>
+
+    <!-- Define outputs for logging -->
+    <Appenders>
+         <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>${patternLayout}</Pattern>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!--
+         Define specific loggers for some packages
+         -->
+        <Logger name="org.springframework" level="ERROR" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.apache.commons" level="ERROR" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="com.sun.org.apache.xerces" level="ERROR" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.hibernate.type.sql" level="TRACE" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.hibernate.hql" level="TRACE" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <!-- General loggers -->
+        <Root level="DEBUG" includeLocation="true">
+            <!-- <AppenderRef ref="logFile"/> -->
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>
